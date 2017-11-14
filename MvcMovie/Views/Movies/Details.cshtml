@@ -1,0 +1,70 @@
+﻿@model MvcMovie.Models.MovieDetailsModel
+@{
+	ViewData["Title"] = "Details";
+}
+<h2>Details</h2>
+<div>
+	<h4>Movie</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.movie.Title)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.movie.Title)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.movie.ReleaseDate)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.movie.ReleaseDate)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.movie.Genre)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.movie.Genre)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.movie.Price)
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.movie.Price)
+		</dd>
+	</dl>
+</div>
+<div>
+	<a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.movie.ID">Edit</a>
+	<a class="btn btn-default" asp-action="Index">Back to List</a>
+</div>
+
+<table>
+	<tbody>
+		<tr>
+			<th><h4>Reviews</h4></th>
+		</tr>
+		@foreach (var item in Model.reviews)
+		{
+			if (item.ReviewID == Model.movie.ID)
+			{
+			<tr>
+				<td>
+					<p>@item.Comment</p>
+					- @item.ReviewerName
+					<hr />
+				</td>
+				<td>
+					<a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Edit" asp-route-id="@item.ReviewID">Edit</a>
+					<a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.ReviewID">Delete</a>
+				</td>
+				@{
+					item.ReviewID = (int)ViewData["mID"];
+				}
+			</tr>
+			}
+		}
+	</tbody>
+</table>
+<div>
+	<a class="btn btn-lg btn-info" asp-controller="Reviews" asp-action="Create" asp-route-id="@ViewData["mID"]">Write a Review</a>
+</div>
