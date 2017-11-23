@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using MvcMovie.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MvcMovie.Controllers
 {
-    public class ReviewsController : Controller
+	[Authorize]
+	public class ReviewsController : Controller
     {
         private readonly MvcMovieContext _context;
 

@@ -1,8 +1,10 @@
 ﻿@model MvcMovie.Models.Review
-
+@using Microsoft.AspNetCore.Identity
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
+@inject UserManager<ApplicationUser> UserManager;
+
 
 <h2>Create</h2>
 

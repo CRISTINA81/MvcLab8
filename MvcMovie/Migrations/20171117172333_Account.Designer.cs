@@ -11,8 +11,8 @@ using System;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    [Migration("20171109172142_Review")]
-    partial class Review
+    [Migration("20171117172333_Account")]
+    partial class Account
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,7 +49,7 @@ namespace MvcMovie.Migrations
 
             modelBuilder.Entity("MvcMovie.Models.Review", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("ReviewID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Comment");
@@ -58,7 +58,7 @@ namespace MvcMovie.Migrations
 
                     b.Property<string>("ReviewerName");
 
-                    b.HasKey("ID");
+                    b.HasKey("ReviewID");
 
                     b.ToTable("Review");
                 });

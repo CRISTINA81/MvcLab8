@@ -32,39 +32,45 @@
 			@Html.DisplayFor(model => model.movie.Price)
 		</dd>
 	</dl>
+		
 </div>
 <div>
-	<a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.movie.ID">Edit</a>
-	<a class="btn btn-default" asp-action="Index">Back to List</a>
-</div>
 
+	<a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.movie.ID">Edit</a>
+
+	<a class="btn btn-warning" asp-action="Index">Back to List</a>
+
+	<a asp-action="Create" asp-controller="Reviews" asp-route-id="@Model.movie.ID" class="btn btn-lg btn-info">Write a Review</a>
+	
+</div>
 <table>
 	<tbody>
 		<tr>
-			<th><h4>Reviews</h4></th>
+			<th><h3>Reviews</h3></th>
 		</tr>
 		@foreach (var item in Model.reviews)
 		{
-			if (item.ReviewID == Model.movie.ID)
-			{
 			<tr>
 				<td>
-					<p>@item.Comment</p>
-					- @item.ReviewerName
+					<p>@Html.DisplayFor(modelItem => item.Comment)</p>
+					- @Html.DisplayFor(modelItem => item.ReviewerName)
 					<hr />
 				</td>
 				<td>
+				<td>
+					
 					<a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Edit" asp-route-id="@item.ReviewID">Edit</a>
-					<a class="btn btn-xs btn-default" asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.ReviewID">Delete</a>
+					@if (Model.reviews.Count > 0)
+					{
+						<a deactivated class="btn btn- btn-default" asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.ReviewID">Delete</a>
+					}
+					else
+					{
+						<a class="btn btn- btn-default" asp-controller="Reviews" asp-action="Delete" asp-route-id="@item.ReviewID">Delete</a>
+					}
 				</td>
-				@{
-					item.ReviewID = (int)ViewData["mID"];
-				}
 			</tr>
+
 			}
-		}
 	</tbody>
 </table>
-<div>
-	<a class="btn btn-lg btn-info" asp-controller="Reviews" asp-action="Create" asp-route-id="@ViewData["mID"]">Write a Review</a>
-</div>
